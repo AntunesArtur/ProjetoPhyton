@@ -26,10 +26,12 @@ def save_data(filename, data):
     with open(f'data/{filename}', 'w') as file:
         json.dump(data, file, indent=2)
 
+
 # Carregar dados
 listCliente = load_data('listcliente.json')
 listAutomovel = load_data('listautomovel.json')
 listBooking = load_data('listbooking.json')
+
 
 # Funções de gerenciamento de listas
 def add_item(lista, item):
@@ -43,6 +45,7 @@ def update_item(lista, id, new_data):
 
 def remove_item(lista, id):
     lista[:] = [item for item in lista if item['id'] != id]
+
 
 # Funções de listagem
 def list_clientes():
@@ -62,6 +65,7 @@ def list_bookings():
         print(f"Automóvel: {automovel['marca']} - {automovel['matricula']}")
         print(f"Total: {booking['precoReserva']} €\n")
 
+
 # Função principal do menu
 # def main_menu():
 #     while True:
@@ -79,7 +83,6 @@ def list_bookings():
 #                 "Sair"
 #             ]
 #         )
-
 #         if choice == "Gerenciar Clientes":
 #             manage_list(listCliente, 'listcliente.json')
 #         elif choice == "Gerenciar Automóveis":
@@ -110,8 +113,7 @@ def main_menu():
         "Pesquisar Automóvel",
         "Pesquisar Cliente",
         "Sair"
-    ]
-    
+    ]    
     while True:
         choice = select("Selecione uma opção:", options)
 
@@ -133,12 +135,6 @@ def main_menu():
             search_cliente()
         elif choice == "Sair":
             break
-
-
-
-
-
-
 
 
 def manage_list(lista, filename):

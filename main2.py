@@ -80,8 +80,7 @@ def main_menu():
         "Pesquisar Automóvel",
         "Pesquisar Cliente",
         "Sair"
-    ]
-    
+    ]   
     while True:
         choice = display_menu(options)
         
