@@ -2,6 +2,8 @@ import json
 import os
 from datetime import datetime, timedelta
 
+#comment
+
 # Funções para carregar e salvar dados
 def load_data(filename):
     filepath = f'data/{filename}'
