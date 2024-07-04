@@ -1,7 +1,6 @@
 import json
 import os
 from datetime import datetime, timedelta
-from beaupy import select, prompt
 
 # Funções para carregar e salvar dados
 def load_data(filename):
@@ -55,6 +54,20 @@ def list_bookings():
             print(f"Automóvel: {automovel['marca']} - {automovel['matricula']}")
             print(f"Total: {booking['precoReserva']} €\n")
 
+# Função para exibir menu e obter escolha
+def display_menu(options):
+    for i, option in enumerate(options, 1):
+        print(f"{i}. {option}")
+    while True:
+        try:
+            choice = int(input("Escolha uma opção: "))
+            if 1 <= choice <= len(options):
+                return options[choice - 1]
+            else:
+                print("Opção inválida. Tente novamente.")
+        except ValueError:
+            print("Por favor, digite um número.")
+
 # Função principal do menu
 def main_menu():
     options = [
@@ -70,12 +83,8 @@ def main_menu():
     ]
     
     while True:
-        choice = beaupy.select("Selecione uma opção:", options)
+        choice = display_menu(options)
         
-        if choice is None:
-            print("Operação cancelada.")
-            continue
-
         if choice == "Gerenciar Clientes":
             manage_list(listCliente, 'listcliente.json', 'cliente')
         elif choice == "Gerenciar Automóveis":
@@ -99,21 +108,17 @@ def manage_list(lista, filename, item_type):
     options = ["Adicionar", "Atualizar", "Remover", "Voltar"]
     
     while True:
-        choice = select(f"Gerenciar {item_type}s:", options)
+        choice = display_menu(options)
         
-        if choice is None:
-            print("Operação cancelada.")
-            continue
-
         if choice == "Adicionar":
             new_item = get_item_data(item_type)
             add_item(lista, new_item)
         elif choice == "Atualizar":
-            id_to_update = prompt("Digite o ID do item a ser atualizado:")
+            id_to_update = input("Digite o ID do item a ser atualizado: ")
             updated_data = get_item_data(item_type, update=True)
             update_item(lista, id_to_update, updated_data)
         elif choice == "Remover":
-            id_to_remove = prompt("Digite o ID do item a ser removido:")
+            id_to_remove = input("Digite o ID do item a ser removido: ")
             remove_item(lista, id_to_remove)
         elif choice == "Voltar":
             break
@@ -123,31 +128,31 @@ def manage_list(lista, filename, item_type):
 def get_item_data(item_type, update=False):
     if item_type == 'cliente':
         return {
-            "id": prompt("ID:") if not update else None,
-            "nome": prompt("Nome:"),
-            "nif": prompt("NIF:"),
-            "dataNascimento": prompt("Data de Nascimento (DD-MM-AAAA):"),
-            "telefone": prompt("Telefone:"),
-            "email": prompt("Email:")
+            "id": input("ID: ") if not update else None,
+            "nome": input("Nome: "),
+            "nif": input("NIF: "),
+            "dataNascimento": input("Data de Nascimento (DD-MM-AAAA): "),
+            "telefone": input("Telefone: "),
+            "email": input("Email: ")
         }
     elif item_type == 'automóvel':
         return {
-            "id": prompt("ID:") if not update else None,
-            "matricula": prompt("Matrícula:"),
-            "marca": prompt("Marca:"),
-            "modelo": prompt("Modelo:"),
-            "cor": prompt("Cor:"),
-            "portas": prompt("Número de Portas:"),
-            "precoDiario": prompt("Preço Diário:"),
-            "cilindrada": prompt("Cilindrada:"),
-            "potencia": prompt("Potência:")
+            "id": input("ID: ") if not update else None,
+            "matricula": input("Matrícula: "),
+            "marca": input("Marca: "),
+            "modelo": input("Modelo: "),
+            "cor": input("Cor: "),
+            "portas": int(input("Número de Portas: ")),
+            "precoDiario": float(input("Preço Diário: ")),
+            "cilindrada": int(input("Cilindrada: ")),
+            "potencia": int(input("Potência: "))
         }
     elif item_type == 'booking':
         return {
-            "data_inicio": prompt("Data de Início (AAAA-MM-DD):"),
-            "data_fim": prompt("Data de Fim (AAAA-MM-DD):"),
-            "cliente_id": prompt("ID do Cliente:"),
-            "automovel_id": prompt("ID do Automóvel:"),
+            "data_inicio": input("Data de Início (AAAA-MM-DD): "),
+            "data_fim": input("Data de Fim (AAAA-MM-DD): "),
+            "cliente_id": input("ID do Cliente: "),
+            "automovel_id": input("ID do Automóvel: "),
             "precoReserva": calculate_booking_price(),
             "numeroDias": calculate_num_days()
         }
@@ -161,7 +166,7 @@ def calculate_num_days():
     return 0  # Placeholder
 
 def search_automovel():
-    matricula = prompt("Digite a matrícula do automóvel:")
+    matricula = input("Digite a matrícula do automóvel: ")
     for automovel in listAutomovel:
         if automovel['matricula'] == matricula:
             print(f"Dados do automóvel:")
@@ -175,7 +180,7 @@ def search_automovel():
     print("Automóvel não encontrado.")
 
 def search_cliente():
-    nif = prompt("Digite o NIF do cliente:")
+    nif = input("Digite o NIF do cliente: ")
     for cliente in listCliente:
         if str(cliente['nif']) == nif:
             print(f"Dados do cliente:")
