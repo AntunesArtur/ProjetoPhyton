@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nome": "João Silva",
+    "nif": 221099811,
+    "dataNascimento": "12-12-2000",
+    "telefone": 912384448,
+    "email": "joaosilva@email.com"
+  },
+  {
+    "id": 2,
+    "nome": "Maria Santos",
+    "nif": 233099822,
+    "dataNascimento": "15-05-1995",
+    "telefone": 923456789,
+    "email": "mariasantos@email.com"
+  }
+]

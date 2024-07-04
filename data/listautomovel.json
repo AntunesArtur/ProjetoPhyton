@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "matricula": "AA-44-PP",
+    "marca": "Seat",
+    "modelo": "Ibiza",
+    "cor": "Preto",
+    "portas": 5,
+    "precoDiario": 29.32,
+    "cilindrada": 1200,
+    "potencia": 75
+  },
+  {
+    "id": 2,
+    "matricula": "BB-55-QQ",
+    "marca": "Renault",
+    "modelo": "Clio",
+    "cor": "Branco",
+    "portas": 3,
+    "precoDiario": 25.50,
+    "cilindrada": 1000,
+    "potencia": 65
+  }
+]
