@@ -3,7 +3,7 @@ import os
 from datetime import datetime, timedelta
 from beaupy import select
 
-#teste com github #comment
+#teste com github
 
 # Funções para carregar e salvar dados
 
