@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "nome": "Jo\u00c3\u00a3o Silva",
+    "nome": "Joao Silva",
     "nif": 221099811,
     "dataNascimento": "12-12-2000",
     "telefone": 912384448,
@@ -15,4 +15,68 @@
     "telefone": 923456789,
     "email": "mariasantos@email.com"
   }
+  {
+    "id": 3,
+    "nome": "Ana Oliveira",
+    "nif": 244099833,
+    "dataNascimento": "20-03-1990",
+    "telefone": 934567891,
+    "email": "anaoliveira@email.com"
+  },
+  {
+    "id": 4,
+    "nome": "Carlos Pereira",
+    "nif": 255099844,
+    "dataNascimento": "05-11-1985",
+    "telefone": 945678912,
+    "email": "carlospereira@email.com"
+  },
+  {
+    "id": 5,
+    "nome": "Beatriz Costa",
+    "nif": 266099855,
+    "dataNascimento": "17-08-1988",
+    "telefone": 956789123,
+    "email": "beatrizcosta@email.com"
+  },
+  {
+    "id": 6,
+    "nome": "Luis Almeida",
+    "nif": 277099866,
+    "dataNascimento": "10-02-1975",
+    "telefone": 967891234,
+    "email": "luisalmeida@email.com"
+  },
+  {
+    "id": 7,
+    "nome": "Rita Ferreira",
+    "nif": 288099877,
+    "dataNascimento": "29-07-1992",
+    "telefone": 978912345,
+    "email": "ritaferreira@email.com"
+  },
+  {
+    "id": 8,
+    "nome": "Paulo Rodrigues",
+    "nif": 299099888,
+    "dataNascimento": "13-04-1983",
+    "telefone": 989123456,
+    "email": "paulorodrigues@email.com"
+  },
+  {
+    "id": 9,
+    "nome": "Joana Martins",
+    "nif": 310099899,
+    "dataNascimento": "26-09-1997",
+    "telefone": 990234567,
+    "email": "joanamartins@email.com"
+  },
+  {
+    "id": 10,
+    "nome": "Miguel Sousa",
+    "nif": 321099900,
+    "dataNascimento": "30-06-1981",
+    "telefone": 901345678,
+    "email": "miguelsousa@email.com"
+  } 
 ]
