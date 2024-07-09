@@ -21,4 +21,92 @@
     "cilindrada": 1000,
     "potencia": 65
   }
+  {
+    "id": 3,
+    "matricula": "CC-66-RR",
+    "marca": "Volkswagen",
+    "modelo": "Golf",
+    "cor": "Azul",
+    "portas": 5,
+    "precoDiario": 35.20,
+    "cilindrada": 1400,
+    "potencia": 90
+  },
+  {
+    "id": 4,
+    "matricula": "DD-77-SS",
+    "marca": "Ford",
+    "modelo": "Focus",
+    "cor": "Vermelho",
+    "portas": 5,
+    "precoDiario": 32.75,
+    "cilindrada": 1600,
+    "potencia": 100
+  },
+  {
+    "id": 5,
+    "matricula": "EE-88-TT",
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "cor": "Cinza",
+    "portas": 4,
+    "precoDiario": 30.40,
+    "cilindrada": 1800,
+    "potencia": 110
+  },
+  {
+    "id": 6,
+    "matricula": "FF-99-UU",
+    "marca": "Honda",
+    "modelo": "Civic",
+    "cor": "Preto",
+    "portas": 4,
+    "precoDiario": 33.10,
+    "cilindrada": 2000,
+    "potencia": 120
+  },
+  {
+    "id": 7,
+    "matricula": "GG-10-VV",
+    "marca": "Nissan",
+    "modelo": "Micra",
+    "cor": "Branco",
+    "portas": 3,
+    "precoDiario": 27.80,
+    "cilindrada": 900,
+    "potencia": 60
+  },
+  {
+    "id": 8,
+    "matricula": "HH-11-WW",
+    "marca": "Peugeot",
+    "modelo": "208",
+    "cor": "Azul",
+    "portas": 5,
+    "precoDiario": 28.90,
+    "cilindrada": 1200,
+    "potencia": 82
+  },
+  {
+    "id": 9,
+    "matricula": "II-22-XX",
+    "marca": "Fiat",
+    "modelo": "500",
+    "cor": "Vermelho",
+    "portas": 3,
+    "precoDiario": 24.50,
+    "cilindrada": 1000,
+    "potencia": 70
+  },
+  {
+    "id": 10,
+    "matricula": "JJ-33-YY",
+    "marca": "BMW",
+    "modelo": "1 Series",
+    "cor": "Preto",
+    "portas": 5,
+    "precoDiario": 42.75,
+    "cilindrada": 1500,
+    "potencia": 130
+  }
 ]
