@@ -79,4 +79,83 @@
     "precoReserva": 155.20,
     "numeroDias": 5
 }
+{
+    "data_inicio": "2024-08-09",
+    "data_fim": "2024-08-14",
+    "cliente_id": 6,
+    "automovel_id": 3,
+    "precoReserva": 210.50,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-08-15",
+    "data_fim": "2024-08-20",
+    "cliente_id": 3,
+    "automovel_id": 5,
+    "precoReserva": 180.00,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-08-21",
+    "data_fim": "2024-08-27",
+    "cliente_id": 7,
+    "precoReserva": 250.00,
+    "numeroDias": 7
+},
+{
+    "data_inicio": "2024-08-28",
+    "data_fim": "2024-09-02",
+    "cliente_id": 1,
+    "automovel_id": 7,
+    "precoReserva": 195.75,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-09-03",
+    "data_fim": "2024-09-08",
+    "cliente_id": 9,
+    "automovel_id": 8,
+    "precoReserva": 170.40,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-09-09",
+    "data_fim": "2024-09-14",
+    "cliente_id": 5,
+    "automovel_id": 9,
+    "precoReserva": 200.00,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-09-15",
+    "data_fim": "2024-09-20",
+    "cliente_id": 2,
+    "automovel_id": 10,
+    "precoReserva": 220.00,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-09-21",
+    "data_fim": "2024-09-27",
+    "cliente_id": 4,
+    "automovel_id": 11,
+    "precoReserva": 275.00,
+    "numeroDias": 7
+},
+{
+    "data_inicio": "2024-09-28",
+    "data_fim": "2024-10-03",
+    "cliente_id": 10,
+    "automovel_id": 12,
+    "precoReserva": 150.00,
+    "numeroDias": 6
+},
+{
+    "data_inicio": "2024-10-04",
+    "data_fim": "2024-10-09",
+    "cliente_id": 8,
+    "automovel_id": 13,
+    "precoReserva": 230.00,
+    "numeroDias": 6
+}
 ]
