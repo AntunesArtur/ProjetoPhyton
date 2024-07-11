@@ -409,6 +409,35 @@ def fix_existing_data():
     save_data('listbooking.json', listBooking)
     print("Dados existentes corrigidos e salvos.")
 
+
+def funcao_teste():
+    texto = 'atum-peixe'
+    pesquisa = '-p'
+
+    if pesquisa in texto:
+        print("verdadeiro")
+    else:
+        print("falso")
+
+def validate_input_string(msg): # em "msg" passar o texto a apre
+    while True:
+        try:
+            val = input(msg)
+        except:
+            print(f"\nErro: Não inseriu o valor.\n")
+        if not val.strip() == "": #para controlar se o campo está a vazio ou só com espaços
+            return val
+        else:            
+            print(f"\nErro: Valor em branco. Tem de inserir um valor.\n")
+
+def validate_input_int(msg):
+    while True:
+        try:
+            val = int(input(msg))
+            return val
+        except:
+            print(f"\nErro: deverá colocar um valor numérico.\n")
+
 if __name__ == "__main__":
     # main_menu()
     main_menu2()
