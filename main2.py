@@ -144,13 +144,13 @@ def sub_menu_listas():
         match op:
             case 0:
                 # inserir novo sub menu de edição
-                sub_menu_edição()
+                sub_menu_edicao()
             case 1:
                  # inserir novo sub menu de edição
-                sub_menu_edição()
+                sub_menu_edicao()
             case 2:
                  # inserir novo sub  menu de edição
-                 sub_menu_edição()
+                 sub_menu_edicao()
             case 3:
                 break
             case _:
@@ -205,7 +205,7 @@ def sub_menu_pesquisas():
                 print("\nErro: opção inválida!\n")
 
 # Função sub menu edição com beaupy
-def sub_menu_edição():   
+def sub_menu_edicao():   
     
     listaMenus = [
                 "1 - Novo", 
