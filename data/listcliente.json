@@ -2,17 +2,41 @@
   {
     "id": 1,
     "nome": "Jo\u00c3\u00a3o Silva",
-    "nif": 221099811,
-    "dataNascimento": "12-12-2000",
-    "telefone": 912384448,
-    "email": "joaosilva@email.com"
+    "nif": "123456789",
+    "dataNascimento": "12-01-1981",
+    "telefone": "912345678",
+    "email": "joao.silva@email.com"
   },
   {
     "id": 2,
-    "nome": "Maria Santos",
-    "nif": 233099822,
-    "dataNascimento": "15-05-1995",
-    "telefone": 923456789,
-    "email": "mariasantos@email.com"
+    "nome": "Margarida Antunes",
+    "nif": "2135963265",
+    "dataNascimento": "23-12-1997",
+    "telefone": "3513612345245",
+    "email": "margarida@gmail.com"
+  },
+  {
+    "nome": "Margarida Nicolau",
+    "nif": "131202413",
+    "dataNascimento": "05-04-1980",
+    "telefone": "351923588843",
+    "email": "margarida@gmail.com",
+    "id": 3
+  },
+  {
+    "nome": "Artur Antunes",
+    "nif": "221245268",
+    "dataNascimento": "12-12-1981",
+    "telefone": "95624598",
+    "email": "artur@gmail.com",
+    "id": 4
+  },
+  {
+    "nome": "juliana martins",
+    "nif": "123456789",
+    "dataNascimento": "15-06-1978",
+    "telefone": "255123123",
+    "email": "juliana",
+    "id": 5
   }
 ]
