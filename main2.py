@@ -1,5 +1,6 @@
 import json
 import os
+import beaupy
 from datetime import datetime, timedelta
 
 # Funções para carregar e salvar dados
@@ -126,6 +127,132 @@ def main_menu():
             search_cliente()
         elif choice == "Sair":
             break
+
+# Função principal do menu com beaupy
+def main_menu2():   
+    
+    listaMenus = [
+                "1 - Gerir Listas", 
+                "2 - Listagens",
+                "3 - Pesquisas",
+                "4 - Sair"
+                  ]
+    while True:
+        op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+            case 0:
+                # inserir novo sub menu com listas
+                sub_menu_listas()
+            case 1:
+                #inserir novo sub menu com tipos listagens
+                sub_menu_listagens()
+            case 2:
+                #inserir novo sub menu com tipos pesquisas
+                sub_menu_pesquisas()
+            case 3:
+                break
+            case _:
+                print("\nErro: opção inválida!\n")
+
+# Função sub menu listas com beaupy
+def sub_menu_listas():   
+    
+    listaMenus = [
+                "1 - Clientes", 
+                "2 - Automóveis",
+                "3 - Bookings",
+                "4 - Sair"
+                  ]
+    while True:
+        op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+            case 0:
+                # inserir novo sub menu de edição
+                sub_menu_edicao()
+            case 1:
+                 # inserir novo sub menu de edição
+                sub_menu_edicao()
+            case 2:
+                 # inserir novo sub  menu de edição
+                 sub_menu_edicao()
+            case 3:
+                break
+            case _:
+                print("\nErro: opção inválida!\n")
+
+# Função sub menu listagens com beaupy
+def sub_menu_listagens():   
+    
+    listaMenus = [
+                "1 - Listagem de Clientes", 
+                "2 - Listagem de Automóveis",
+                "3 - Listagem de Bookings",
+                "4 - Sair"
+                  ]
+    while True:
+        op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+            case 0:
+                pass
+                # inserir função de listagem de clientes
+            case 1:
+                pass
+                 # inserir função de listagem de automóveis
+            case 2:
+                pass
+                 # inserir função de listagem de bookings
+            case 3:
+                break
+            case _:
+                print("\nErro: opção inválida!\n")
+
+# Função sub menu Pesquisas com beaupy
+def sub_menu_pesquisas():   
+    
+    listaMenus = [
+                "1 - Pesquisa alugueres por Automóvel", 
+                "2 - Pesquisa alugueres por Cliente",                
+                "3 - Sair"
+                  ]
+    while True:
+        op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+            case 0:
+                pass
+                # inserir função de listagem de alugueres por automóvel
+            case 1:
+                pass
+                 # inserir função de listagem de alugueres por cliente            
+            case 2:
+                break
+            case _:
+                print("\nErro: opção inválida!\n")
+
+# Função sub menu edição com beaupy
+def sub_menu_edicao():   
+    
+    listaMenus = [
+                "1 - Novo", 
+                "2 - Atualizar",
+                "3 - Remover",
+                "4 - Sair"
+                  ]
+    while True:
+        op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+            case 0:
+                pass
+                # inserir função para inserir novo cliente automóvel ou booking
+            case 1:
+                pass
+                 # inserir função para alterar cliente automóvel ou booking
+            case 2:
+                pass
+                 # inserir função para remover cliente automóvel ou booking
+            case 3:
+                break
+            case _:
+                print("\nErro: opção inválida!\n")
 
 def manage_list(lista, filename, item_type):
     options = ["Adicionar", "Atualizar", "Remover", "Voltar"]
@@ -283,5 +410,5 @@ def fix_existing_data():
     print("Dados existentes corrigidos e salvos.")
 
 if __name__ == "__main__":
-    fix_existing_data()
-    main_menu()
+    # main_menu()
+    main_menu2()
