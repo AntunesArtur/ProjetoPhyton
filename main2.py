@@ -210,21 +210,46 @@ def sub_menu_listagens():
 def sub_menu_pesquisas():   
     
     listaMenus = [
-                "1 - Pesquisa alugueres por Automóvel", 
-                "2 - Pesquisa alugueres por Cliente",                
-                "3 - Sair"
+                "1 - Pesquisa alugueres por Automóvel com ajuda", 
+                "2 - Pesquisa alugueres por Automóvel",
+                "3 - Pesquisa alugueres por Cliente com ajuda",    
+                "4 - Pesquisa alugueres por Cliente",             
+                "5 - Sair"
                   ]
     while True:
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                search_automovel()
+                    # inserir função de listagem de alugueres por automóvel
+                    sub_sub_menu_pesquisas(listAutomovel, 'matricula')
             case 1:
-                search_cliente()
+                pass
+                    # inserir função de listagem de alugueres por automóvel
             case 2:
+                    # inserir função de listagem de alugueres por cliente 
+                    sub_sub_menu_pesquisas(listCliente, 'nome') 
+            case 3:
+                pass
+                    # inserir função de listagem de alugueres por cliente            
+            case 4:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
+
+def sub_sub_menu_pesquisas(lst, key):   
+    
+    listMenus = list_menu(lst, key)
+    while True:
+        op = beaupy.select(listMenus, cursor="=>", cursor_style="red", return_index=True)
+        match op:
+                case _ if op < len(listMenus) -1:
+                    pass
+                    # inserir função que vai apresentar objeto e alugueres
+                case _ if op == len(listMenus)-1:                    
+                    break
+                case _:
+                    print("\nErro: opção inválida!\n")       
+
 
 # Função sub menu edição com beaupy
 def sub_menu_edicao():   
@@ -242,18 +267,31 @@ def sub_menu_edicao():
                 new_item = get_item_data('cliente')
                 add_item(listCliente, new_item)   #função para adicionar novo cliente 
                 save_data('listcliente.json', listCliente)
+                # usar as funções que o Francisco alterou. è necessário passar do menú anterior por um parâmetro na função sub_menu_edicao
+                # o valor escolhido (cliente, automóvel ou booking) para criar um case e usar a função correta para introdução dos dados
             case 1:
                 new_item = get_item_data('automóvel')
                 add_item(listAutomovel, new_item)     #função novo automovel
                 save_data('listautomovel.json', listAutomovel)
+                 # fazer o mesmo procedimento do ponto anterior
             case 2:
                 new_item = get_item_data('booking')
                 add_item(listBooking, new_item)        #função nobo booking
+                 # fazer o mesmo procedimento do ponto anterior
                 save_data('listbooking.json', listBooking)
             case 3:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
+
+def list_menu(lst, key):
+    list_temp = [val[key] for val in lst if isinstance(val, dict) and key in val]
+    list_temp.append('Sair')
+    if list_temp:
+        return list_temp
+    else:
+        return []
+
 def manage_list(lista, filename, item_type):
     options = ["Adicionar", "Atualizar", "Remover", "Voltar"]
     list_clientes()
