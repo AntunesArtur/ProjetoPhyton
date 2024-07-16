@@ -1,112 +1,114 @@
 [
   {
     "id": 1,
-    "matricula": "AA-44-PP",
-    "marca": "Seat",
-    "modelo": "Ibiza",
-    "cor": "Preto",
-    "portas": 5,
-    "precoDiario": 29.32,
-    "cilindrada": 1200,
-    "potencia": 75
+    "nome": "Joao Silva",
+    "nif": 221099811,
+    "dataNascimento": "12-12-2000",
+    "telefone": 912384448,
+    "email": "joaosilva@email.com"
   },
   {
     "id": 2,
-    "matricula": "BB-55-QQ",
-    "marca": "Renault",
-    "modelo": "Clio",
-    "cor": "Branco",
-    "portas": 3,
-    "precoDiario": 25.5,
-    "cilindrada": 1000,
-    "potencia": 65
+    "nome": "Maria Santos",
+    "nif": 233099822,
+    "dataNascimento": "15-05-1995",
+    "telefone": 923456789,
+    "email": "mariasantos@email.com"
   },
   {
     "id": 3,
-    "matricula": "CC-66-RR",
-    "marca": "Volkswagen",
-    "modelo": "Golf",
-    "cor": "Azul",
-    "portas": 5,
-    "precoDiario": 35.2,
-    "cilindrada": 1400,
-    "potencia": 90
+    "nome": "Ana Oliveira",
+    "nif": 244099833,
+    "dataNascimento": "20-03-1990",
+    "telefone": 934567891,
+    "email": "anaoliveira@email.com"
   },
   {
     "id": 4,
-    "matricula": "DD-77-SS",
-    "marca": "Ford",
-    "modelo": "Focus",
-    "cor": "Vermelho",
-    "portas": 5,
-    "precoDiario": 32.75,
-    "cilindrada": 1600,
-    "potencia": 100
+    "nome": "Carlos Pereira",
+    "nif": 255099844,
+    "dataNascimento": "05-11-1985",
+    "telefone": 945678912,
+    "email": "carlospereira@email.com"
   },
   {
     "id": 5,
-    "matricula": "EE-88-TT",
-    "marca": "Toyota",
-    "modelo": "Corolla",
-    "cor": "Cinza",
-    "portas": 4,
-    "precoDiario": 30.4,
-    "cilindrada": 1800,
-    "potencia": 110
+    "nome": "Beatriz Costa",
+    "nif": 266099855,
+    "dataNascimento": "17-08-1988",
+    "telefone": 956789123,
+    "email": "beatrizcosta@email.com"
   },
   {
     "id": 6,
-    "matricula": "FF-99-UU",
-    "marca": "Honda",
-    "modelo": "Civic",
-    "cor": "Preto",
-    "portas": 4,
-    "precoDiario": 33.1,
-    "cilindrada": 2000,
-    "potencia": 120
+    "nome": "Luis Almeida",
+    "nif": 277099866,
+    "dataNascimento": "10-02-1975",
+    "telefone": 967891234,
+    "email": "luisalmeida@email.com"
   },
   {
     "id": 7,
-    "matricula": "GG-10-VV",
-    "marca": "Nissan",
-    "modelo": "Micra",
-    "cor": "Branco",
-    "portas": 3,
-    "precoDiario": 27.8,
-    "cilindrada": 900,
-    "potencia": 60
+    "nome": "Rita Ferreira",
+    "nif": 288099877,
+    "dataNascimento": "29-07-1992",
+    "telefone": 978912345,
+    "email": "ritaferreira@email.com"
   },
   {
     "id": 8,
-    "matricula": "HH-11-WW",
-    "marca": "Peugeot",
-    "modelo": "208",
-    "cor": "Azul",
-    "portas": 5,
-    "precoDiario": 28.9,
-    "cilindrada": 1200,
-    "potencia": 82
+    "nome": "Paulo Rodrigues",
+    "nif": 299099888,
+    "dataNascimento": "13-04-1983",
+    "telefone": 989123456,
+    "email": "paulorodrigues@email.com"
   },
   {
     "id": 9,
-    "matricula": "II-22-XX",
-    "marca": "Fiat",
-    "modelo": "500",
-    "cor": "Vermelho",
-    "portas": 3,
-    "precoDiario": 24.5,
-    "cilindrada": 1000,
-    "potencia": 70
+    "nome": "Joana Martins",
+    "nif": 310099899,
+    "dataNascimento": "26-09-1997",
+    "telefone": 990234567,
+    "email": "joanamartins@email.com"
   },
   {
     "id": 10,
-    "matricula": "JJ-33-YY",
-    "marca": "BMW",
-    "modelo": "1 Series",
-    "cor": "Preto",
-    "portas": 5,
-    "precoDiario": 42.75,
-    "cilindrada": 1500,
-    "potencia": 130
+    "nome": "Miguel Sousa",
+    "nif": "321099900",
+    "dataNascimento": "30-06-1981",
+    "telefone": 901345678,
+    "email": "miguelsousa@email.com"
+  },
+  {
+    "nome": "Artur Magalhaes",
+    "nif": "221248123",
+    "dataNascimento": "12-12-1980",
+    "telefone": "919645652",
+    "email": "magalhaes@aws.pt",
+    "id": 11
+  },
+  {
+    "nome": "Diogo Pereira",
+    "nif": "251248119",
+    "dataNascimento": "1997-12-23",
+    "telefone": "93444444",
+    "email": "diogo@gmail.com",
+    "id": 12
+  },
+  {
+    "nome": "",
+    "nif": "",
+    "dataNascimento": "",
+    "telefone": "",
+    "email": "",
+    "id": 13
+  },
+  {
+    "nome": "Diogo",
+    "nif": "251248119",
+    "dataNascimento": "23-12-1997",
+    "telefone": "919614121",
+    "email": "diogo@gmail.com",
+    "id": 14
   }
 ]

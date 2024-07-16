@@ -2,6 +2,7 @@ import json
 import os
 import beaupy
 from datetime import datetime, timedelta
+import re
 
 # Funções para carregar e salvar dados
 def load_data(filename):
@@ -168,13 +169,13 @@ def sub_menu_listas():
         match op:
             case 0:
                 # inserir novo sub menu de edição
-                sub_menu_edicao()
+                sub_menu_edicao(op)
             case 1:
                  # inserir novo sub menu de edição
-                sub_menu_edicao()
+                sub_menu_edicao(op)
             case 2:
                  # inserir novo sub  menu de edição
-                 sub_menu_edicao()
+                 sub_menu_edicao(op)
             case 3:
                 break
             case _:
@@ -252,7 +253,7 @@ def sub_sub_menu_pesquisas(lst, key):
 
 
 # Função sub menu edição com beaupy
-def sub_menu_edicao():   
+def sub_menu_edicao(op_menu_listas):   
     
     listaMenus = [
                 "1 - Novo", 
@@ -264,25 +265,175 @@ def sub_menu_edicao():
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                new_item = get_item_data('cliente')
-                add_item(listCliente, new_item)   #função para adicionar novo cliente 
-                save_data('listcliente.json', listCliente)
-                # usar as funções que o Francisco alterou. è necessário passar do menú anterior por um parâmetro na função sub_menu_edicao
-                # o valor escolhido (cliente, automóvel ou booking) para criar um case e usar a função correta para introdução dos dados
+                match op_menu_listas:
+                    case 0:
+                        new_item = get_item_data(op_menu_listas)
+                        add_item(listCliente, new_item)   #função para adicionar novo cliente 
+                        save_data('listcliente.json', listCliente)
+                    case 1:
+                        new_item = get_item_data(op_menu_listas)
+                        add_item(listAutomovel, new_item)     #função novo automovel
+                        save_data('listautomovel.json', listAutomovel)
+                        # fazer o mesmo procedimento do ponto anterior
+                    case 2:
+                        new_item = get_item_data(op_menu_listas)
+                        add_item(listBooking, new_item)        #função nobo booking
+                        # fazer o mesmo procedimento do ponto anterior
+                        save_data('listbooking.json', listBooking)
+                    case _:
+                        print("\nErro: opção inválida!\n")
+                        # usar as funções que o Francisco alterou. è necessário passar do menú anterior por um parâmetro na função sub_menu_edicao
+                        # o valor escolhido (cliente, automóvel ou booking) para criar um case e usar a função correta para introdução dos dados
             case 1:
-                new_item = get_item_data('automóvel')
-                add_item(listAutomovel, new_item)     #função novo automovel
-                save_data('listautomovel.json', listAutomovel)
-                 # fazer o mesmo procedimento do ponto anterior
+                # lista=[]
+                match op_menu_listas:
+                    case 0:
+                        lista=listCliente
+                        id_to_update = int(input("Digite o ID do item a ser atualizado: ")) 
+                        item_to_update = next((item for item in lista if item['id'] == id_to_update), None)
+                        if item_to_update:
+                            updated_data = update_item_data(item_to_update, op_menu_listas)
+                            update_item(lista, id_to_update, updated_data)
+                            print("Item atualizado com sucesso.")
+                        else:
+                            print(f"Item com ID {id_to_update} não encontrado.")
+                        save_data('listcliente.json', lista)
+                    case 1:
+                        lista=listAutomovel
+                        id_to_update = int(input("Digite o ID do item a ser atualizado: ")) 
+                        item_to_update = next((item for item in lista if item['id'] == id_to_update), None)
+                        if item_to_update:
+                            updated_data = update_item_data(item_to_update, op_menu_listas)
+                            update_item(lista, id_to_update, updated_data)
+                            print("Item atualizado com sucesso.")
+                        else:
+                            print(f"Item com ID {id_to_update} não encontrado.")
+                        save_data('listautomovel.json', lista)
+                    case 2:
+                        lista=listBooking
+                        id_to_update = int(input("Digite o ID do item a ser atualizado: ")) 
+                        item_to_update = next((item for item in lista if item['id'] == id_to_update), None)
+                        if item_to_update:
+                            updated_data = update_item_data(item_to_update, op_menu_listas)
+                            update_item(lista, id_to_update, updated_data)
+                            print("Item atualizado com sucesso.")
+                        else:
+                            print(f"Item com ID {id_to_update} não encontrado.")
+                        save_data('listbooking.json', lista)
+                    case _:
+                        print("\nErro: opção inválida!\n")
+                
             case 2:
-                new_item = get_item_data('booking')
-                add_item(listBooking, new_item)        #função nobo booking
-                 # fazer o mesmo procedimento do ponto anterior
-                save_data('listbooking.json', listBooking)
+                 match op_menu_listas:
+                    case 0:
+                        remove_item_main(listCliente,'listcliente.json')
+                    case 1:
+                        remove_item_main(listAutomovel,'listautomovel.json')
+                    case 2:
+                        remove_item_main(listBooking,'listbooking.json')
+                    case _:
+                        print("\nErro: opção inválida!\n")
             case 3:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
+                
+def remove_item_main(lista, filename):
+    id_to_remove = int(input("Digite o ID do item a ser removido: "))
+    remove_item(lista, id_to_remove)
+    print("Item removido com sucesso.")
+    save_data(filename, listCliente)
+
+#funções do francisco 
+def validate_date(date_text, format="%d-%m-%Y"):
+    try:
+        datetime.strptime(date_text, format)
+        return True
+    except ValueError:
+        return False
+ 
+def validate_email(email):
+    regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(regex, email) is not None
+ 
+def validate_nif(nif):
+    return nif.isdigit() and len(nif) == 9
+ 
+def validate_telefone(telefone):
+    return telefone.isdigit() and len(telefone) in [9, 10]
+ 
+def calculate_num_days(data_inicio, data_fim):
+    start_date = datetime.strptime(data_inicio, "%Y-%m-%d")
+    end_date = datetime.strptime(data_fim, "%Y-%m-%d")
+    return (end_date - start_date).days
+ 
+def calculate_booking_price(num_dias, automovel_id):
+    # This function should be implemented to fetch the price based on the car ID and calculate the total.
+    # For now, let's return a placeholder value.
+    return num_dias * 100  # Example: daily price is 100
+ 
+def get_item_data(item_type):
+    if item_type == 0:
+        while True:
+            nome = input("Nome: ")
+            nif = input("NIF: ")
+            dataNascimento = input("Data de Nascimento (DD-MM-AAAA): ")
+            telefone = input("Telefone: ")
+            email = input("Email: ")
+ 
+            if not validate_nif(nif):
+                print("NIF inválido. Deve ter 9 dígitos.")
+                continue
+            if not validate_date(dataNascimento):
+                print("Data de nascimento inválida. Use o formato DD-MM-AAAA.")
+                continue
+            if not validate_telefone(telefone):
+                print("Telefone inválido. Deve ter 9 ou 10 dígitos.")
+                continue
+            if not validate_email(email):
+                print("Email inválido.")
+                continue
+            break
+ 
+        return {
+            "nome": nome,
+            "nif": nif,
+            "dataNascimento": dataNascimento,
+            "telefone": telefone,
+            "email": email
+        }
+ 
+    elif item_type == 1:
+        while True:
+            matricula = input("Matrícula: ")
+            marca = input("Marca: ")
+            modelo = input("Modelo: ")
+            cor = input("Cor: ")
+            try:
+                portas = int(input("Número de Portas: "))
+                precoDiario = float(input("Preço Diário: "))
+                cilindrada = int(input("Cilindrada: "))
+                potencia = int(input("Potência: "))
+                break
+            except ValueError:
+                print("Entrada inválida. Verifique se os valores numéricos foram digitados corretamente.")
+                continue
+ 
+        return {
+            "matricula": matricula,
+            "marca": marca,
+            "modelo": modelo,
+            "cor": cor,
+            "portas": portas,
+            "precoDiario": precoDiario,
+            "cilindrada": cilindrada,
+            "potencia": potencia
+        }
+ 
+    # elif item_type == 2:
+    #     while True:
+    #         data_inicio = input("Data de Início (AAAA-MM-DD): ")
+    #         data_fim = input("Data de Fim (             
 
 def list_menu(lst, key):
     list_temp = [val[key] for val in lst if isinstance(val, dict) and key in val]
@@ -304,7 +455,7 @@ def manage_list(lista, filename, item_type):
             new_id = add_item(lista, new_item)
             print(f"Item adicionado com ID: {new_id}")
         elif choice == "Atualizar":
-            id_to_update = int(input("Digite o ID do item a ser atualizado: "))
+            id_to_update = int(input("Digite o ID do item a ser atualizado: ")) 
             item_to_update = next((item for item in lista if item['id'] == id_to_update), None)
             if item_to_update:
                 updated_data = update_item_data(item_to_update, item_type)
@@ -321,43 +472,44 @@ def manage_list(lista, filename, item_type):
 
     save_data(filename, lista)
 
-def get_item_data(item_type):
-    if item_type == 'cliente':
-        return {
-            "nome": input("Nome: "),
-            "nif": input("NIF: "),
-            "dataNascimento": input("Data de Nascimento (DD-MM-AAAA): "),
-            "telefone": input("Telefone: "),
-            "email": input("Email: ")
-        }
-    elif item_type == 'automóvel':
-        return {
-            "matricula": input("Matrícula: "),
-            "marca": input("Marca: "),
-            "modelo": input("Modelo: "),
-            "cor": input("Cor: "),
-            "portas": int(input("Número de Portas: ")),
-            "precoDiario": float(input("Preço Diário: ")),
-            "cilindrada": int(input("Cilindrada: ")),
-            "potencia": int(input("Potência: "))
-        }
-    elif item_type == 'booking':
-        data_inicio = input("Data de Início (AAAA-MM-DD): ")
-        data_fim = input("Data de Fim (AAAA-MM-DD): ")
-        cliente_id = int(input("ID do Cliente: "))
-        automovel_id = int(input("ID do Automóvel: "))
+#função a eleminar 
+# def get_item_data(item_type):
+#     if item_type == 'cliente':
+#         return {
+#             "nome": input("Nome: "),
+#             "nif": input("NIF: "),
+#             "dataNascimento": input("Data de Nascimento (DD-MM-AAAA): "),
+#             "telefone": input("Telefone: "),
+#             "email": input("Email: ")
+#         }
+#     elif item_type == 'automóvel':
+#         return {
+#             "matricula": input("Matrícula: "),
+#             "marca": input("Marca: "),
+#             "modelo": input("Modelo: "),
+#             "cor": input("Cor: "),
+#             "portas": int(input("Número de Portas: ")),
+#             "precoDiario": float(input("Preço Diário: ")),
+#             "cilindrada": int(input("Cilindrada: ")),
+#             "potencia": int(input("Potência: "))
+#         }
+#     elif item_type == 'booking':
+#         data_inicio = input("Data de Início (AAAA-MM-DD): ")
+#         data_fim = input("Data de Fim (AAAA-MM-DD): ")
+#         cliente_id = int(input("ID do Cliente: "))
+#         automovel_id = int(input("ID do Automóvel: "))
         
-        num_dias = calculate_num_days(data_inicio, data_fim)
-        preco_reserva = calculate_booking_price(num_dias, automovel_id)
+#         num_dias = calculate_num_days(data_inicio, data_fim)
+#         preco_reserva = calculate_booking_price(num_dias, automovel_id)
         
-        return {
-            "data_inicio": data_inicio,
-            "data_fim": data_fim,
-            "cliente_id": cliente_id,
-            "automovel_id": automovel_id,
-            "precoReserva": preco_reserva,
-            "numeroDias": num_dias
-        }
+#         return {
+#             "data_inicio": data_inicio,
+#             "data_fim": data_fim,
+#             "cliente_id": cliente_id,
+#             "automovel_id": automovel_id,
+#             "precoReserva": preco_reserva,
+#             "numeroDias": num_dias
+#         }
 
 def update_item_data(item, item_type):
     updated_item = item.copy()
@@ -373,7 +525,7 @@ def update_item_data(item, item_type):
                 else:
                     updated_item[key] = input(f"Novo valor para {key}: ")
     
-    if item_type == 'booking':
+    if item_type == 2: #refere se ao booking 
         # Recalcular numeroDias e precoReserva se as datas foram alteradas
         if updated_item['data_inicio'] != item['data_inicio'] or updated_item['data_fim'] != item['data_fim']:
             updated_item['numeroDias'] = calculate_num_days(updated_item['data_inicio'], updated_item['data_fim'])
