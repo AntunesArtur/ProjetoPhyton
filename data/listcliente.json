@@ -74,9 +74,33 @@
   {
     "id": 10,
     "nome": "Miguel Sousa",
-    "nif": 321099900,
+    "nif": "321099900",
     "dataNascimento": "30-06-1981",
     "telefone": 901345678,
     "email": "miguelsousa@email.com"
-  } 
+  },
+  {
+    "nome": "Artur Magalhaes",
+    "nif": "221248123",
+    "dataNascimento": "12-12-1980",
+    "telefone": "919645652",
+    "email": "magalhaes@aws.pt",
+    "id": 11
+  },
+  {
+    "nome": "Diogo Pereira",
+    "nif": "251248119",
+    "dataNascimento": "1997-12-23",
+    "telefone": "93444444",
+    "email": "diogo@gmail.com",
+    "id": 12
+  },
+  {
+    "nome": "",
+    "nif": "",
+    "dataNascimento": "",
+    "telefone": "",
+    "email": "",
+    "id": 13
+  }
 ]

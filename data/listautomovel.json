@@ -28,7 +28,7 @@
     "modelo": "Golf",
     "cor": "Azul",
     "portas": 5,
-    "precoDiario": 35.20,
+    "precoDiario": 35.2,
     "cilindrada": 1400,
     "potencia": 90
   },
@@ -50,7 +50,7 @@
     "modelo": "Corolla",
     "cor": "Cinza",
     "portas": 4,
-    "precoDiario": 30.40,
+    "precoDiario": 30.4,
     "cilindrada": 1800,
     "potencia": 110
   },
@@ -61,7 +61,7 @@
     "modelo": "Civic",
     "cor": "Preto",
     "portas": 4,
-    "precoDiario": 33.10,
+    "precoDiario": 33.1,
     "cilindrada": 2000,
     "potencia": 120
   },
@@ -72,7 +72,7 @@
     "modelo": "Micra",
     "cor": "Branco",
     "portas": 3,
-    "precoDiario": 27.80,
+    "precoDiario": 27.8,
     "cilindrada": 900,
     "potencia": 60
   },
@@ -83,7 +83,7 @@
     "modelo": "208",
     "cor": "Azul",
     "portas": 5,
-    "precoDiario": 28.90,
+    "precoDiario": 28.9,
     "cilindrada": 1200,
     "potencia": 82
   },
@@ -94,7 +94,7 @@
     "modelo": "500",
     "cor": "Vermelho",
     "portas": 3,
-    "precoDiario": 24.50,
+    "precoDiario": 24.5,
     "cilindrada": 1000,
     "potencia": 70
   },

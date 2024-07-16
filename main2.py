@@ -193,14 +193,14 @@ def sub_menu_listagens():
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                pass
-                # inserir função de listagem de clientes
+                #pass
+                list_clientes()
             case 1:
-                pass
-                 # inserir função de listagem de automóveis
+                #pass
+                list_automoveis()
             case 2:
-                pass
-                 # inserir função de listagem de bookings
+                #pass
+                list_bookings()
             case 3:
                 break
             case _:
@@ -218,11 +218,9 @@ def sub_menu_pesquisas():
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                pass
-                # inserir função de listagem de alugueres por automóvel
+                search_automovel()
             case 1:
-                pass
-                 # inserir função de listagem de alugueres por cliente            
+                search_cliente()
             case 2:
                 break
             case _:
@@ -241,19 +239,21 @@ def sub_menu_edicao():
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                pass
-                # inserir função para inserir novo cliente automóvel ou booking
+                new_item = get_item_data('cliente')
+                add_item(listCliente, new_item)   #função para adicionar novo cliente 
+                save_data('listcliente.json', listCliente)
             case 1:
-                pass
-                 # inserir função para alterar cliente automóvel ou booking
+                new_item = get_item_data('automóvel')
+                add_item(listAutomovel, new_item)     #função novo automovel
+                save_data('listautomovel.json', listAutomovel)
             case 2:
-                pass
-                 # inserir função para remover cliente automóvel ou booking
+                new_item = get_item_data('booking')
+                add_item(listBooking, new_item)        #função nobo booking
+                save_data('listbooking.json', listBooking)
             case 3:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
-
 def manage_list(lista, filename, item_type):
     options = ["Adicionar", "Atualizar", "Remover", "Voltar"]
     list_clientes()
