@@ -107,14 +107,6 @@
     "id": 31
   },
   {
-    "data_inicio": "2024-08-21",
-    "data_fim": "2024-08-27",
-    "cliente_id": 7,
-    "precoReserva": 250.0,
-    "numeroDias": 7,
-    "id": 32
-  },
-  {
     "data_inicio": "2024-08-28",
     "data_fim": "2024-09-02",
     "cliente_id": 1,
@@ -176,22 +168,5 @@
     "precoReserva": 230.0,
     "numeroDias": 6,
     "id": 39
-  },
-  {
-    "data_inicio": "2024-10-04",
-    "data_fim": "2024-10-09",
-    "cliente_id": 8,
-    "automovel_id": 13,
-    "precoReserva": 230.00,
-    "numeroDias": 6
-},
-{
-    "data_inicio": "2024-07-20",
-    "data_fim": "2024-07-25",
-    "cliente_id": 4,
-    "automovel_id": 2,
-    "precoReserva": 130.04999999999998,
-    "numeroDias": 6
   }
 ]
-

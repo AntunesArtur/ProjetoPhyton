@@ -54,9 +54,6 @@ def update_item(lista, id, new_data):
             item.update(new_data)
             break
 
-def remove_item(lista, id):
-    lista[:] = [item for item in lista if item['id'] != id]
-
 # Funções de listagem
 def list_clientes():
     for cliente in listCliente:
@@ -79,58 +76,8 @@ def list_bookings():
             print(f"Automóvel: {automovel['marca']} - {automovel['matricula']}")
             print(f"Total: {booking.get('precoReserva', 'N/A')} €\n")
 
-# Função para exibir menu e obter escolha
-def display_menu(options):
-    for i, option in enumerate(options, 1):
-        print(f"{i}. {option}")
-    while True:
-        try:
-            choice = int(input("Escolha uma opção: "))
-            if 1 <= choice <= len(options):
-                return options[choice - 1]
-            else:
-                print("Opção inválida. Tente novamente.")
-        except ValueError:
-            print("Por favor, digite um número.")
-
-# Função principal do menu
-def main_menu():
-    options = [
-        "Gerenciar Clientes",
-        "Gerenciar Automóveis",
-        "Gerenciar Bookings",
-        "Listar Clientes",
-        "Listar Automóveis",
-        "Listar Bookings",
-        "Pesquisar Automóvel",
-        "Pesquisar Cliente",
-        "Sair"
-    ]
-    
-    while True:
-        choice = display_menu(options)
-        
-        if choice == "Gerenciar Clientes":
-            manage_list(listCliente, 'listcliente.json', 'cliente')
-        elif choice == "Gerenciar Automóveis":
-            manage_list(listAutomovel, 'listautomovel.json', 'automóvel')
-        elif choice == "Gerenciar Bookings":
-            manage_list(listBooking, 'listbooking.json', 'booking')
-        elif choice == "Listar Clientes":
-            list_clientes()
-        elif choice == "Listar Automóveis":
-            list_automoveis()
-        elif choice == "Listar Bookings":
-            list_bookings()
-        elif choice == "Pesquisar Automóvel":
-            search_automovel()
-        elif choice == "Pesquisar Cliente":
-            search_cliente()
-        elif choice == "Sair":
-            break
-
 # Função principal do menu com beaupy
-def main_menu2():   
+def main_menu2():
     
     listaMenus = [
                 "1 - Gerir Listas", 
@@ -208,7 +155,7 @@ def sub_menu_listagens():
                 print("\nErro: opção inválida!\n")
 
 # Função sub menu Pesquisas com beaupy
-def sub_menu_pesquisas():   
+def sub_menu_pesquisas():
     
     listaMenus = [
                 "1 - Pesquisa alugueres por Automóvel com ajuda", 
@@ -224,20 +171,20 @@ def sub_menu_pesquisas():
                     # inserir função de listagem de alugueres por automóvel
                     sub_sub_menu_pesquisas(listAutomovel, 'matricula')
             case 1:
-                pass
                     # inserir função de listagem de alugueres por automóvel
+                    search_automovel()
             case 2:
                     # inserir função de listagem de alugueres por cliente 
                     sub_sub_menu_pesquisas(listCliente, 'nome') 
             case 3:
-                pass
-                    # inserir função de listagem de alugueres por cliente            
+                    # inserir função de listagem de alugueres por cliente
+                    search_cliente()             
             case 4:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
 
-def sub_sub_menu_pesquisas(lst, key):   
+def sub_sub_menu_pesquisas(lst, key):
     
     listMenus = list_menu(lst, key)
     while True:
@@ -253,7 +200,7 @@ def sub_sub_menu_pesquisas(lst, key):
 
 
 # Função sub menu edição com beaupy
-def sub_menu_edicao(op_menu_listas):   
+def sub_menu_edicao(op_menu_listas):
     
     listaMenus = [
                 "1 - Novo", 
@@ -340,9 +287,9 @@ def sub_menu_edicao(op_menu_listas):
                 
 def remove_item_main(lista, filename):
     id_to_remove = int(input("Digite o ID do item a ser removido: "))
-    remove_item(lista, id_to_remove)
+    lista[:] = [item for item in lista if item['id'] != id]
     print("Item removido com sucesso.")
-    save_data(filename, listCliente)
+    save_data(filename, lista)
 
 #funções do francisco 
 def validate_date(date_text, format="%d-%m-%Y"):
@@ -366,11 +313,6 @@ def calculate_num_days(data_inicio, data_fim):
     start_date = datetime.strptime(data_inicio, "%Y-%m-%d")
     end_date = datetime.strptime(data_fim, "%Y-%m-%d")
     return (end_date - start_date).days
- 
-def calculate_booking_price(num_dias, automovel_id):
-    # This function should be implemented to fetch the price based on the car ID and calculate the total.
-    # For now, let's return a placeholder value.
-    return num_dias * 100  # Example: daily price is 100
  
 def get_item_data(item_type):
     if item_type == 0:
@@ -429,11 +371,7 @@ def get_item_data(item_type):
             "cilindrada": cilindrada,
             "potencia": potencia
         }
- 
-    # elif item_type == 2:
-    #     while True:
-    #         data_inicio = input("Data de Início (AAAA-MM-DD): ")
-    #         data_fim = input("Data de Fim (             
+
 
 def list_menu(lst, key):
     list_temp = [val[key] for val in lst if isinstance(val, dict) and key in val]
@@ -443,73 +381,6 @@ def list_menu(lst, key):
     else:
         return []
 
-def manage_list(lista, filename, item_type):
-    options = ["Adicionar", "Atualizar", "Remover", "Voltar"]
-    list_clientes()
-    
-    while True:
-        choice = display_menu(options)
-        
-        if choice == "Adicionar":
-            new_item = get_item_data(item_type)
-            new_id = add_item(lista, new_item)
-            print(f"Item adicionado com ID: {new_id}")
-        elif choice == "Atualizar":
-            id_to_update = int(input("Digite o ID do item a ser atualizado: ")) 
-            item_to_update = next((item for item in lista if item['id'] == id_to_update), None)
-            if item_to_update:
-                updated_data = update_item_data(item_to_update, item_type)
-                update_item(lista, id_to_update, updated_data)
-                print("Item atualizado com sucesso.")
-            else:
-                print(f"Item com ID {id_to_update} não encontrado.")
-        elif choice == "Remover":
-            id_to_remove = int(input("Digite o ID do item a ser removido: "))
-            remove_item(lista, id_to_remove)
-            print("Item removido com sucesso.")
-        elif choice == "Voltar":
-            break
-
-    save_data(filename, lista)
-
-#função a eleminar 
-# def get_item_data(item_type):
-#     if item_type == 'cliente':
-#         return {
-#             "nome": input("Nome: "),
-#             "nif": input("NIF: "),
-#             "dataNascimento": input("Data de Nascimento (DD-MM-AAAA): "),
-#             "telefone": input("Telefone: "),
-#             "email": input("Email: ")
-#         }
-#     elif item_type == 'automóvel':
-#         return {
-#             "matricula": input("Matrícula: "),
-#             "marca": input("Marca: "),
-#             "modelo": input("Modelo: "),
-#             "cor": input("Cor: "),
-#             "portas": int(input("Número de Portas: ")),
-#             "precoDiario": float(input("Preço Diário: ")),
-#             "cilindrada": int(input("Cilindrada: ")),
-#             "potencia": int(input("Potência: "))
-#         }
-#     elif item_type == 'booking':
-#         data_inicio = input("Data de Início (AAAA-MM-DD): ")
-#         data_fim = input("Data de Fim (AAAA-MM-DD): ")
-#         cliente_id = int(input("ID do Cliente: "))
-#         automovel_id = int(input("ID do Automóvel: "))
-        
-#         num_dias = calculate_num_days(data_inicio, data_fim)
-#         preco_reserva = calculate_booking_price(num_dias, automovel_id)
-        
-#         return {
-#             "data_inicio": data_inicio,
-#             "data_fim": data_fim,
-#             "cliente_id": cliente_id,
-#             "automovel_id": automovel_id,
-#             "precoReserva": preco_reserva,
-#             "numeroDias": num_dias
-#         }
 
 def update_item_data(item, item_type):
     updated_item = item.copy()
@@ -525,18 +396,13 @@ def update_item_data(item, item_type):
                 else:
                     updated_item[key] = input(f"Novo valor para {key}: ")
     
-    if item_type == 2: #refere se ao booking 
+    if item_type == 2: #refere se ao booking
         # Recalcular numeroDias e precoReserva se as datas foram alteradas
         if updated_item['data_inicio'] != item['data_inicio'] or updated_item['data_fim'] != item['data_fim']:
             updated_item['numeroDias'] = calculate_num_days(updated_item['data_inicio'], updated_item['data_fim'])
             updated_item['precoReserva'] = calculate_booking_price(updated_item['numeroDias'], updated_item['automovel_id'])
 
     return updated_item
-
-def calculate_num_days(data_inicio, data_fim):
-    d1 = datetime.strptime(data_inicio, "%Y-%m-%d")
-    d2 = datetime.strptime(data_fim, "%Y-%m-%d")
-    return (d2 - d1).days + 1
 
 def calculate_booking_price(num_dias, automovel_id):
     automovel = next((a for a in listAutomovel if a['id'] == automovel_id), None)
@@ -566,7 +432,7 @@ def search_automovel():
             for key, value in automovel.items():
                 print(f"{key}: {value}")
             print("\nÚltimos 5 alugueres:")
-            bookings = [b for b in listBooking if b['automovel_id'] == automovel['id']]
+            bookings = [b for b in listBooking if int(b["automovel_id"]) == int(automovel["id"])]
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
                 print(f"Data: {booking['data_inicio']} a {booking['data_fim']}")
             return
@@ -586,48 +452,4 @@ def search_cliente():
             return
     print("Cliente não encontrado.")
 
-def fix_existing_data():
-    global listCliente, listAutomovel, listBooking
-    
-    for lista in [listCliente, listAutomovel, listBooking]:
-        for item in lista:
-            if 'id' not in item:
-                item['id'] = get_next_id(lista)
-    
-    save_data('listcliente.json', listCliente)
-    save_data('listautomovel.json', listAutomovel)
-    save_data('listbooking.json', listBooking)
-    print("Dados existentes corrigidos e salvos.")
-
-
-def funcao_teste():
-    texto = 'atum-peixe'
-    pesquisa = '-p'
-
-    if pesquisa in texto:
-        print("verdadeiro")
-    else:
-        print("falso")
-
-def validate_input_string(msg): # em "msg" passar o texto a apre
-    while True:
-        try:
-            val = input(msg)
-        except:
-            print(f"\nErro: Não inseriu o valor.\n")
-        if not val.strip() == "": #para controlar se o campo está a vazio ou só com espaços
-            return val
-        else:            
-            print(f"\nErro: Valor em branco. Tem de inserir um valor.\n")
-
-def validate_input_int(msg):
-    while True:
-        try:
-            val = int(input(msg))
-            return val
-        except:
-            print(f"\nErro: deverá colocar um valor numérico.\n")
-
-if __name__ == "__main__":
-    # main_menu()
-    main_menu2()
+main_menu2()
