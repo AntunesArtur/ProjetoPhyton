@@ -313,6 +313,14 @@ def calculate_num_days(data_inicio, data_fim):
     start_date = datetime.strptime(data_inicio, "%Y-%m-%d")
     end_date = datetime.strptime(data_fim, "%Y-%m-%d")
     return (end_date - start_date).days
+
+def validate_matricula(matricula):
+    matpattern = r'^[A-Z]{2}-\d{2}-[A-Z]{2}$'
+    if re.match(matpattern, matricula)
+        return True
+    else:
+        return False
+
  
 def get_item_data(item_type):
     if item_type == 0:
@@ -352,22 +360,21 @@ def get_item_data(item_type):
             "email": email
         }
  
-    elif item_type == 1:
+    if item_type == 1:
         while True:
             matricula = input("Matrícula: ")
-            marca = input("Marca: ")
+            if not validate_matricula(matricula):
+                    print("Matrícula inválida.")
+            else:
+                break
             modelo = input("Modelo: ")
             cor = input("Cor: ")
-            try:
-                portas = int(input("Número de Portas: "))
-                precoDiario = float(input("Preço Diário: "))
-                cilindrada = int(input("Cilindrada: "))
-                potencia = int(input("Potência: "))
-                break
-            except ValueError:
-                print("Entrada inválida. Verifique se os valores numéricos foram digitados corretamente.")
-                continue
- 
+            portas = int(input("Número de Portas: "))
+            precoDiario = float(input("Preço Diário: "))
+            cilindrada = int(input("Cilindrada: "))
+            potencia = int(input("Potência: "))
+            break
+
         return {
             "matricula": matricula,
             "marca": marca,
@@ -377,7 +384,7 @@ def get_item_data(item_type):
             "precoDiario": precoDiario,
             "cilindrada": cilindrada,
             "potencia": potencia
-        }
+            }
 
 
 def list_menu(lst, key):
@@ -403,8 +410,7 @@ def update_item_data(item, item_type):
                 else:
                     updated_item[key] = input(f"Novo valor para {key}: ")
     
-    if item_type == 2: #refere se ao booking
-        # Recalcular numeroDias e precoReserva se as datas foram alteradas
+    if item_type == 2:
         if updated_item['data_inicio'] != item['data_inicio'] or updated_item['data_fim'] != item['data_fim']:
             updated_item['numeroDias'] = calculate_num_days(updated_item['data_inicio'], updated_item['data_fim'])
             updated_item['precoReserva'] = calculate_booking_price(updated_item['numeroDias'], updated_item['automovel_id'])
