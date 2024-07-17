@@ -318,23 +318,30 @@ def get_item_data(item_type):
     if item_type == 0:
         while True:
             nome = input("Nome: ")
-            nif = input("NIF: ")
-            dataNascimento = input("Data de Nascimento (DD-MM-AAAA): ")
-            telefone = input("Telefone: ")
-            email = input("Email: ")
- 
-            if not validate_nif(nif):
-                print("NIF inválido. Deve ter 9 dígitos.")
-                continue
-            if not validate_date(dataNascimento):
-                print("Data de nascimento inválida. Use o formato DD-MM-AAAA.")
-                continue
-            if not validate_telefone(telefone):
-                print("Telefone inválido. Deve ter 9 ou 10 dígitos.")
-                continue
-            if not validate_email(email):
-                print("Email inválido.")
-                continue
+            while True:
+                nif = input("NIF: ")
+                if not validate_nif(nif):
+                    print("NIF inválido. Deve ter 9 dígitos.")
+                else:
+                    break
+            while True:
+                dataNascimento = input("Data de Nascimento (DD-MM-AAAA): ")
+                if not validate_date(dataNascimento):
+                    print("Data de nascimento inválida. Use o formato DD-MM-AAAA.")
+                else:
+                    break
+            while True:
+                telefone = input("Telefone: ")
+                if not validate_telefone(telefone):
+                    print("Telefone inválido. Deve ter 9 ou 10 dígitos.")
+                else:
+                    break
+            while True:
+                email = input("Email: ")
+                if not validate_email(email):
+                    print("Email inválido.")
+                else:
+                    break
             break
  
         return {
