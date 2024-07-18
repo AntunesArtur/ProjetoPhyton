@@ -172,7 +172,8 @@ def sub_menu_pesquisas():
                     sub_sub_menu_pesquisas(listAutomovel, 'matricula')
             case 1:
                     # inserir função de listagem de alugueres por automóvel
-                    search_automovel()
+                    matricula = input_matricula()
+                    search_automovel(matricula)
             case 2:
                     # inserir função de listagem de alugueres por cliente 
                     sub_sub_menu_pesquisas(listCliente, 'nome') 
@@ -186,12 +187,16 @@ def sub_menu_pesquisas():
 
 def sub_sub_menu_pesquisas(lst, key):
     
-    listMenus = list_menu(lst, key)
+    listFiltrated = list_filtrated(lst, key)
+    listMenus = list_menu(listFiltrated, key)
     while True:
         op = beaupy.select(listMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
                 case _ if op < len(listMenus) -1:
-                    pass
+                    
+                    # item_value = listFiltrated[op]['id']
+                    item_value = listMenus[op]
+                    search_automovel(item_value)
                     # inserir função que vai apresentar objeto e alugueres
                 case _ if op == len(listMenus)-1:                    
                     break
@@ -284,10 +289,11 @@ def sub_menu_edicao(op_menu_listas):
                 break
             case _:
                 print("\nErro: opção inválida!\n")
-                
+
+#função para remoção de items               
 def remove_item_main(lista, filename):
     id_to_remove = int(input("Digite o ID do item a ser removido: "))
-    lista[:] = [item for item in lista if item['id'] != id]
+    lista[:] = [item for item in lista if item['id'] != id_to_remove]
     print("Item removido com sucesso.")
     save_data(filename, lista)
 
@@ -316,7 +322,7 @@ def calculate_num_days(data_inicio, data_fim):
 
 def validate_matricula(matricula):
     matpattern = r'^[A-Z]{2}-\d{2}-[A-Z]{2}$'
-    if re.match(matpattern, matricula)
+    if re.match(matpattern, matricula):
         return True
     else:
         return False
@@ -377,7 +383,7 @@ def get_item_data(item_type):
 
         return {
             "matricula": matricula,
-            "marca": marca,
+            "marca": marca, # falta o input para a marcar acima
             "modelo": modelo,
             "cor": cor,
             "portas": portas,
@@ -386,10 +392,21 @@ def get_item_data(item_type):
             "potencia": potencia
             }
 
-
+#função para criar listagens dos menus beaupy
 def list_menu(lst, key):
-    list_temp = [val[key] for val in lst if isinstance(val, dict) and key in val]
+    try:
+        list_temp = [val[key] for val in lst]
+    except:
+        pass   
     list_temp.append('Sair')
+    if list_temp:
+        return list_temp
+    else:
+        return []
+
+#função para obter lista sem linhas que possam ter problemas de ausência de chave
+def list_filtrated(lst, key):
+    list_temp = [val for val in lst if isinstance(val, dict) and key in val]
     if list_temp:
         return list_temp
     else:
@@ -437,17 +454,27 @@ def calculate_booking_price(num_dias, automovel_id):
     
     return preco_total * (1 - desconto)
 
-def search_automovel():
-    matricula = input("Digite a matrícula do automóvel: ").upper()
+
+def input_matricula():
+    while True:
+        matricula = input("Digite a matrícula do automóvel: ")
+        if not validate_matricula(matricula):
+                print("Matrícula inválida.")
+        else:
+            break  
+
+def search_automovel(matricula):    
     for automovel in listAutomovel:
-        if automovel['matricula'].upper() == matricula:
+        if automovel['matricula'].upper() == matricula.upper():
             print(f"Dados do automóvel:")
             for key, value in automovel.items():
                 print(f"{key}: {value}")
             print("\nÚltimos 5 alugueres:")
-            bookings = [b for b in listBooking if int(b["automovel_id"]) == int(automovel["id"])]
+            bookings = [b for b in listBooking if int(b["automovel_id"]) == int(automovel["id"]) and  datetime.strptime(b["data_fim"], "%Y-%m-%d").date() < datetime.now().date()]
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
                 print(f"Data: {booking['data_inicio']} a {booking['data_fim']}")
+            if bookings == []:
+                print(f"Não existem alugueres!")
             return
     print("Automóvel não encontrado.")
 
