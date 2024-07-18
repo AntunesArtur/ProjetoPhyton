@@ -26,10 +26,7 @@ def save_data(filename, data):
     with open(f'data/{filename}', 'w') as file:
         json.dump(data, file, indent=2)
 
-# Carregar dados
-listCliente = load_data('listcliente.json')
-listAutomovel = load_data('listautomovel.json')
-listBooking = load_data('listbooking.json')
+
 
 # Função para obter o próximo ID disponível
 def get_next_id(lista):
@@ -56,8 +53,13 @@ def update_item(lista, id, new_data):
 
 # Funções de listagem
 def list_clientes():
+    # Cabeçalho com largura fixa para cada coluna
+    print(f"{'ID':<5} {'Nome':<20} {'NIF':<10} {'Data de Nascimento':<15}")
+    # Dados formatados
     for cliente in listCliente:
-        print(f"ID: {cliente['id']}, Nome: {cliente['nome']}, NIF: {cliente['nif']},Data de Nascimento: {cliente['dataNascimento']}")
+        print(f"{cliente['id']:<5} {cliente['nome']:<20} {cliente['nif']:<10} {cliente['dataNascimento']:<15}")
+    # for cliente in listCliente:
+    #     print(f"ID: {cliente['id']}, Nome: {cliente['nome']}, NIF: {cliente['nif']},Data de Nascimento: {cliente['dataNascimento']}")
 
 def list_automoveis():
     for automovel in listAutomovel:
@@ -86,8 +88,7 @@ def list_bookings():
 
 
 # Função principal do menu com beaupy
-def main_menu2():
-    
+def main_menu2():    
     listaMenus = [
                 "1 - Gerir Listas", 
                 "2 - Listagens",
@@ -95,16 +96,14 @@ def main_menu2():
                 "4 - Sair"
                   ]
     while True:
+        print()
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                # inserir novo sub menu com listas
                 sub_menu_listas()
             case 1:
-                #inserir novo sub menu com tipos listagens
                 sub_menu_listagens()
             case 2:
-                #inserir novo sub menu com tipos pesquisas
                 sub_menu_pesquisas()
             case 3:
                 break
@@ -113,7 +112,6 @@ def main_menu2():
 
 # Função sub menu listas com beaupy
 def sub_menu_listas():   
-    
     listaMenus = [
                 "1 - Clientes", 
                 "2 - Automóveis",
@@ -121,16 +119,14 @@ def sub_menu_listas():
                 "4 - Sair"
                   ]
     while True:
+        print()
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                # inserir novo sub menu de edição
                 sub_menu_edicao(op)
             case 1:
-                 # inserir novo sub menu de edição
                 sub_menu_edicao(op)
             case 2:
-                 # inserir novo sub  menu de edição
                  sub_menu_edicao(op)
             case 3:
                 break
@@ -138,8 +134,7 @@ def sub_menu_listas():
                 print("\nErro: opção inválida!\n")
 
 # Função sub menu listagens com beaupy
-def sub_menu_listagens():   
-    
+def sub_menu_listagens():  
     listaMenus = [
                 "1 - Listagem de Clientes", 
                 "2 - Listagem de Automóveis",
@@ -147,6 +142,7 @@ def sub_menu_listagens():
                 "4 - Sair"
                   ]
     while True:
+        print()
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
@@ -162,7 +158,6 @@ def sub_menu_listagens():
 
 # Função sub menu Pesquisas com beaupy
 def sub_menu_pesquisas():
-    
     listaMenus = [
                 "1 - Pesquisa alugueres por Automóvel com ajuda", 
                 "2 - Pesquisa alugueres por Automóvel",
@@ -171,39 +166,40 @@ def sub_menu_pesquisas():
                 "5 - Sair"
                   ]
     while True:
+        print()
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
-                    # inserir função de listagem de alugueres por automóvel
-                    sub_sub_menu_pesquisas(listAutomovel, 'matricula')
+                    sub_sub_menu_pesquisas(listAutomovel, 'matricula', op)
             case 1:
-                    # inserir função de listagem de alugueres por automóvel
                     matricula = input_matricula()
                     search_automovel(matricula)
             case 2:
-                    # inserir função de listagem de alugueres por cliente 
-                    sub_sub_menu_pesquisas(listCliente, 'nome') 
+                    sub_sub_menu_pesquisas(listCliente, 'nome', op) 
             case 3:
-                    # inserir função de listagem de alugueres por cliente
-                    search_cliente()             
+                    nif = input_nif()
+                    search_cliente(nif, listAutomovel)             
             case 4:
                 break
             case _:
                 print("\nErro: opção inválida!\n")
 
-def sub_sub_menu_pesquisas(lst, key):
-    
+def sub_sub_menu_pesquisas(lst, key, op_menu):    
     listFiltrated = list_filtrated(lst, key)
     listMenus = list_menu(listFiltrated, key)
     while True:
+        print()
         op = beaupy.select(listMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
                 case _ if op < len(listMenus) -1:
-                    
-                    # item_value = listFiltrated[op]['id']
-                    item_value = listMenus[op]
-                    search_automovel(item_value)
-                    # inserir função que vai apresentar objeto e alugueres
+                    #para opção "Pesquisa alugueres por Automóvel com ajuda"
+                    if op_menu == 0: 
+                        item_value = listMenus[op]
+                        search_automovel(item_value)
+                    #para opção "Pesquisa alugueres por Cliente com ajuda"
+                    if op_menu == 2: 
+                        item_value = listFiltrated[op]['nif']
+                        search_cliente(item_value, listAutomovel)                    
                 case _ if op == len(listMenus)-1:                    
                     break
                 case _:
@@ -211,8 +207,7 @@ def sub_sub_menu_pesquisas(lst, key):
 
 
 # Função sub menu edição com beaupy
-def sub_menu_edicao(op_menu_listas):
-    
+def sub_menu_edicao(op_menu_listas):    
     listaMenus = [
                 "1 - Novo", 
                 "2 - Atualizar",
@@ -220,6 +215,7 @@ def sub_menu_edicao(op_menu_listas):
                 "4 - Sair"
                   ]
     while True:
+        print()
         op = beaupy.select(listaMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
             case 0:
@@ -280,9 +276,6 @@ def update_item_menu(list,filename,op_menu_listas):
         save_data(filename, lista)
     else:
         print(f"Item com ID {id_to_update} não encontrado.")
-    
-
-
 
 def remove_item_main(lista, filename):
     id_to_remove = int(input("Digite o ID do item a ser removido: "))
@@ -315,7 +308,7 @@ def calculate_num_days(data_inicio, data_fim):
 
 def validate_matricula(matricula):
     matpattern = r'^[A-Z]{2}-\d{2}-[A-Z]{2}$'
-    if re.match(matpattern, matricula):
+    if re.match(matpattern, matricula): # alterar para permitir maiúsculas e minúsculas if re.match(matpattern, matricula, re.IGNORECASE):
         return True
     else:
         return False
@@ -324,9 +317,9 @@ def validate_matricula(matricula):
 def get_item_data(item_type):
     if item_type == 0:
         while True: #em principio este ciclo não é necessario 
-            nome = input("Nome: ")
+            nome = input("Nome: ") # convém validar se o nome não fica a vazio
             while True:
-                nif = input("NIF: ")
+                nif = input("NIF: ")                
                 if not validate_nif(nif):
                     print("NIF inválido. Deve ter 9 dígitos.")
                 else:
@@ -364,14 +357,14 @@ def get_item_data(item_type):
             matricula = input("Matrícula: ")
             if not validate_matricula(matricula):
                     print("Matrícula inválida.")
-            else:
+            else: # este else com break naão faz sentido
                 break
             modelo = input("Modelo: ")
             cor = input("Cor: ")
-            portas = int(input("Número de Portas: "))
-            precoDiario = float(input("Preço Diário: "))
-            cilindrada = int(input("Cilindrada: "))
-            potencia = int(input("Potência: "))
+            portas = int(input("Número de Portas: ")) #tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
+            precoDiario = float(input("Preço Diário: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
+            cilindrada = int(input("Cilindrada: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
+            potencia = int(input("Potência: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
             break
 
         return {
@@ -452,14 +445,26 @@ def calculate_booking_price(num_dias, automovel_id):
     return preco_total * (1 - desconto)
 # Pesquisa um automóvel por matrícula e mostra os dados com os ultimos 5 alugueres
 
-
+#função para validar entrada de matrícula
 def input_matricula():
     while True:
         matricula = input("Digite a matrícula do automóvel: ")
         if not validate_matricula(matricula):
                 print("Matrícula inválida.")
         else:
-            break  
+            break 
+    return matricula 
+
+#função para validar entrada de NIF
+def input_nif():
+    while True:
+        nif = input("Digite o NIF do cliente: ")        
+        if not validate_nif(nif):
+            print("NIF inválido. Deve ter 9 dígitos.")
+        else:
+            nif = int(nif)            
+            break
+    return nif       
 
 
 def search_automovel(matricula):    
@@ -473,24 +478,37 @@ def search_automovel(matricula):
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
                 print(f"Data: {booking['data_inicio']} a {booking['data_fim']}")
             if bookings == []:
-                print(f"Não existem alugueres!")
-            return
+                print(f"Não existem alugueres!")  
+            return          
     print("Automóvel não encontrado.")
 
-# Pesquisa um cliente por NIF e mos os dados e os últimos 5 alugueres
-
-def search_cliente():
-    nif = input("Digite o NIF do cliente: ")
+# Pesquisa um cliente por NIF e retorna os dados e os últimos 5 alugueres
+def search_cliente(nif, listAutomoveis):   
     for cliente in listCliente:
-        if cliente['nif'] == nif:
+        if int(cliente['nif']) == nif:
+            print()
             print(f"Dados do cliente:")
             for key, value in cliente.items():
-                print(f"{key}: {value}")
+                if key != 'id':                    
+                    print(f"{key}: {value}")
             print("\nÚltimos 5 alugueres:")
-            bookings = [b for b in listBooking if b['cliente_id'] == cliente['id']]
+            bookings = [b for b in listBooking if b['cliente_id'] == cliente['id'] and datetime.strptime(b["data_fim"], "%Y-%m-%d").date() < datetime.now().date()]
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
-                print(f"Data: {booking['data_inicio']} a {booking['data_fim']}")
+                print(f"Data: {booking['data_inicio']} a {booking['data_fim']} Matrícula: {first_or_default(listAutomoveis, 'id', booking['automovel_id'])} Número dias: {booking['numeroDias']} Preço reserva: {booking['precoReserva']} €")                                
             return
     print("Cliente não encontrado.")
-#menu principal do programa a utilizar a biblioteca beupy para interface
+
+#função para pesquisa de matrícula com base no id do automóvel
+def first_or_default(list, key, value, default=None):
+    for val in list:
+        if val[key] == value:
+            return val['matricula']
+    return default
+
+
+# Carregar dados
+listCliente = load_data('listcliente.json')
+listAutomovel = load_data('listautomovel.json')
+listBooking = load_data('listbooking.json')
+
 main_menu2()
