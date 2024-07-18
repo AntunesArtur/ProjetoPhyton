@@ -386,7 +386,9 @@ def get_item_data(item_type):
             }
 #Acrescentar case para introdução de dados do booking!
 #Tem que se inserir o calculo dos descontos do booking e do numero de dias
+
 #função para criar listagens dos menus beaupy
+
 def list_menu(lst, key):
     try:
         list_temp = [val[key] for val in lst]
@@ -450,6 +452,7 @@ def calculate_booking_price(num_dias, automovel_id):
     return preco_total * (1 - desconto)
 # Pesquisa um automóvel por matrícula e mostra os dados com os ultimos 5 alugueres
 
+
 def input_matricula():
     while True:
         matricula = input("Digite a matrícula do automóvel: ")
@@ -457,6 +460,7 @@ def input_matricula():
                 print("Matrícula inválida.")
         else:
             break  
+
 
 def search_automovel(matricula):    
     for automovel in listAutomovel:
