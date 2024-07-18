@@ -1,13 +1,5 @@
 [
   {
-    "data_inicio": "2023-11-27",
-    "data_fim": "2023-12-02",
-    "cliente_id": 1,
-    "automovel_id": 1,
-    "precoReserva": 175.92,
-    "numeroDias": 6
-  },
-  {
     "data_inicio": "2023-12-15",
     "data_fim": "2023-12-18",
     "cliente_id": 2,
