@@ -360,7 +360,11 @@ def get_item_data(item_type):
             modelo = input("Modelo: ")
             while not modelo:
                 print("Modelo não pode estar vazio.")
-                modelo = input("Modelo: ") 
+                modelo = input("Modelo: ")
+            marca = input("Marca: ")  
+            while not marca:
+                print("Marca não pode estar vazia.")
+                marca = input("Marca: ")
             cor = input("Cor: ")
             while not cor:
                 print("Cor não pode estar vazia.")
@@ -405,7 +409,7 @@ def get_item_data(item_type):
 
         return {
             "matricula": matricula,
-            "marca": marca, # falta o input para a marcar acima
+            "marca": marca,
             "modelo": modelo,
             "cor": cor,
             "portas": portas,
@@ -413,8 +417,37 @@ def get_item_data(item_type):
             "cilindrada": cilindrada,
             "potencia": potencia
             }
-#Acrescentar case para introdução de dados do booking!
-#Tem que se inserir o calculo dos descontos do booking e do numero de dias
+
+    if item_type == 2:
+        data_inicio = validate_input_date("Data de Início (AAAA-MM-DD): ")
+        data_fim = validate_input_date("Data de Fim (AAAA-MM-DD): ")
+        cliente_id = validate_input_int("ID do Cliente: ")
+        automovel_id = validate_input_int("ID do Automóvel: ")
+       
+        num_dias = calculate_num_days(data_inicio, data_fim)
+        preco_reserva = calculate_booking_price(num_dias, automovel_id)
+
+        while True:
+            data_inicio = input("Data de Inicio (DD-MM-AAAA): ")
+            if not validate_date(data_inicio):
+                print("Data de inicio inválida. Use o formato DD-MM-AAAA.")
+            else:
+                break
+        while True:
+            data_fim = input("Data de Fim (DD-MM-AAAA): ")
+            if not validate_date(data_fim):
+                print("Data de fim inválida. Use o formato DD-MM-AAAA.")
+            else:
+                break
+                
+        return {
+            "data_inicio": data_inicio.strftime("%Y-%m-%d"),
+            "data_fim": data_fim.strftime("%Y-%m-%d"),
+            "cliente_id": cliente_id,
+            "automovel_id": automovel_id,
+            "precoReserva": preco_reserva,
+            "numeroDias": num_dias
+        }
 
 #função para criar listagens dos menus beaupy
 
