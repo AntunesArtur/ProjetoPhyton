@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "nome": "Maria Santos",
+    "nome": "Maria Santos Teste",
     "nif": 233099822,
     "dataNascimento": "15-05-1995",
     "telefone": 923456789,
@@ -110,14 +110,6 @@
     "telefone": "123456789",
     "email": "ffff@gggg.com",
     "id": 15
-  },
-  {
-    "nome": "teste2",
-    "nif": "999999999",
-    "dataNascimento": "12-03-2020",
-    "telefone": "999999999",
-    "email": "teste2@tese2.com",
-    "id": 16
   },
   {
     "nome": "Ana",
