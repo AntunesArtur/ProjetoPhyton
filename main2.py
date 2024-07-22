@@ -356,15 +356,51 @@ def get_item_data(item_type):
         while True:
             matricula = input("Matrícula: ")
             if not validate_matricula(matricula):
-                    print("Matrícula inválida.")
-            else: # este else com break naão faz sentido
-                break
+                print("Matrícula inválida.")
             modelo = input("Modelo: ")
+            while not modelo:
+                print("Modelo não pode estar vazio.")
+                modelo = input("Modelo: ") 
             cor = input("Cor: ")
-            portas = int(input("Número de Portas: ")) #tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
-            precoDiario = float(input("Preço Diário: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
-            cilindrada = int(input("Cilindrada: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
-            potencia = int(input("Potência: "))#tem de se validar estas entradas caso contrário pode dar erro na tentativa de conversão
+            while not cor:
+                print("Cor não pode estar vazia.")
+                cor = input("Cor: ")
+            while True:
+                try:
+                    portas = int(input("Número de Portas: "))
+                    if portas <= 0:
+                        print("O número de portas deve ser maior que zero.")
+                    else:
+                        break
+                except ValueError:
+                    print("Por favor, insira um número inteiro válido para o número de portas.")
+            while True:
+                try:
+                    precoDiario = float(input("Preço Diário: "))
+                    if precoDiario <= 0:
+                        print("O preço diário deve ser maior que zero.")
+                    else:
+                        break
+                except ValueError:
+                    print("Por favor, insira um número válido para o preço diário.")
+            while True:
+                try:
+                    cilindrada = int(input("Cilindrada: "))
+                    if cilindrada <= 0:
+                        print("A cilindrada deve ser maior que zero.")
+                    else:
+                        break
+                except ValueError:
+                    print("Por favor, insira um número inteiro válido para a cilindrada.")
+            while True:
+                try:
+                    potencia = int(input("Potência: "))
+                    if potencia <= 0:
+                        print("A potência deve ser maior que zero.")
+                    else:
+                        break
+                except ValueError:
+                    print("Por favor, insira um número inteiro válido para a potência.")
             break
 
         return {
