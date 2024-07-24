@@ -118,5 +118,13 @@
     "telefone": "910000111",
     "email": "ana@mail.com",
     "id": 17
+  },
+  {
+    "nome": "Diogo Pereira",
+    "nif": "251248120",
+    "dataNascimento": "23-12-1997",
+    "telefone": "919614122",
+    "email": "diogo@email.com",
+    "id": 18
   }
 ]

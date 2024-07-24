@@ -159,10 +159,10 @@ def sub_menu_listagens():
 # Função sub menu Pesquisas com beaupy
 def sub_menu_pesquisas():
     listaMenus = [
-                "1 - Pesquisa alugueres por Automóvel com ajuda", 
-                "2 - Pesquisa alugueres por Automóvel",
-                "3 - Pesquisa alugueres por Cliente com ajuda",    
-                "4 - Pesquisa alugueres por Cliente",             
+                "1 - Pesquisa alugueres por Automóvel a mostrar as matriculas", 
+                "2 - Pesquisa alugueres por Automóvel indicando a matricula",
+                "3 - Pesquisa alugueres por Cliente com o nome",    
+                "4 - Pesquisa alugueres por Cliente com o NIF",             
                 "5 - Sair"
                   ]
     while True:
@@ -338,7 +338,7 @@ def calculate_num_days(data_inicio, data_fim):
 
 def validate_matricula(matricula):
     matpattern = r'^[A-Z]{2}-\d{2}-[A-Z]{2}$'
-    if re.match(matpattern, matricula): # alterar para permitir maiúsculas e minúsculas if re.match(matpattern, matricula, re.IGNORECASE):
+    if re.match(matpattern, matricula): 
         return True
     else:
         return False
@@ -346,8 +346,8 @@ def validate_matricula(matricula):
  #Recolhe e valida dados para o novo item (cliente, automovel ou booking)
 def get_item_data(item_type):
     if item_type == 0:
-        while True: #em principio este ciclo não é necessario 
-            nome = input("Nome: ") # convém validar se o nome não fica a vazio
+        while True:  
+            nome = input("Nome: ") 
             while True:
                 nif = input("NIF: ")
                 if not validate_nif(nif):
