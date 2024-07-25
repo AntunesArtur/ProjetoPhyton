@@ -480,16 +480,18 @@ def get_item_data(item_type):
                 print("Data de fim inválida. Use o formato DD-MM-AAAA.")
             else:
                 break
+        print()    
         print("Escolha o cliente:")        
         cliente_id = menu_pesquisas_id(listCliente,"nome")
+        print()
         print("Escolha o carro:")
         automovel_id = menu_pesquisas_id(listAutomovel,"matricula")
         num_dias = calculate_num_days(data_inicio, data_fim)
         preco_reserva = calculate_booking_price(num_dias, automovel_id)
 
         return {
-            "data_inicio": data_inicio,#.strftime("%d-%m-%Y"),
-            "data_fim": data_fim,#.strftime("%d-%m-%Y"),
+            "data_inicio": data_inicio,
+            "data_fim": data_fim,
             "cliente_id": cliente_id,
             "automovel_id": automovel_id,
             "precoReserva": preco_reserva,
