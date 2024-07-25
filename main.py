@@ -71,7 +71,7 @@ def list_bookings():
     
     for booking in listBooking:
         # Converte a data de início do booking para um objeto date
-        data_inicio = datetime.strptime(booking.get('data_inicio', ''), "%Y-%m-%d").date()
+        data_inicio = datetime.strptime(booking.get('data_inicio', ''), "%d-%m-%Y").date()
         
         # Verifica se a data de início é futura
         if data_inicio > data_atual:
@@ -185,7 +185,7 @@ def sub_menu_pesquisas():
                 print("\nErro: opção inválida!\n")
 
 def sub_sub_menu_pesquisas(lst, key, op_menu, order_by):    
-    listFiltrated = list_filtrated(lst, key, order_by)
+    listFiltrated = list_filtrated(lst, key, key)
     listMenus = list_menu(listFiltrated, key)
     while True:
         print()
@@ -224,10 +224,10 @@ def sub_sub_menu_atualizar(lst, key, op_menu_listas, order_by):
                     print("\nErro: opção inválida!\n")
 
 def menu_pesquisas_id(lst, key):
-    listFiltrated = list_filtrated(lst, key)
+    listFiltrated = list_filtrated(lst, key, key)
     listMenus = list_menu(listFiltrated, key)
     while True:
-        print()
+        print()        
         op = beaupy.select(listMenus, cursor="=>", cursor_style="red", return_index=True)
         match op:
                 case _ if op < len(listMenus) -1:
@@ -313,7 +313,7 @@ def remove_item_main(lista, filename, id_to_remove):
     print("Item removido com sucesso.")
     save_data(filename, lista)
 
-#funções do francisco validação de dados
+#funções validação de dados
 def validate_date(date_text, format="%d-%m-%Y"):
     try:
         datetime.strptime(date_text, format)
@@ -332,8 +332,8 @@ def validate_telefone(telefone):
     return telefone.isdigit() and len(telefone) in [9, 10]
  
 def calculate_num_days(data_inicio, data_fim):
-    start_date = datetime.strptime(data_inicio, "%Y-%m-%d")
-    end_date = datetime.strptime(data_fim, "%Y-%m-%d")
+    start_date = datetime.strptime(data_inicio, "%d-%m-%Y")
+    end_date = datetime.strptime(data_fim, "%d-%m-%Y")
     return (end_date - start_date).days
 
 def validate_matricula(matricula):
@@ -480,15 +480,16 @@ def get_item_data(item_type):
                 print("Data de fim inválida. Use o formato DD-MM-AAAA.")
             else:
                 break
-
+        print("Escolha o cliente:")        
         cliente_id = menu_pesquisas_id(listCliente,"nome")
+        print("Escolha o carro:")
         automovel_id = menu_pesquisas_id(listAutomovel,"matricula")
         num_dias = calculate_num_days(data_inicio, data_fim)
         preco_reserva = calculate_booking_price(num_dias, automovel_id)
 
         return {
-            "data_inicio": data_inicio.strftime("%Y-%m-%d"),
-            "data_fim": data_fim.strftime("%Y-%m-%d"),
+            "data_inicio": data_inicio,#.strftime("%d-%m-%Y"),
+            "data_fim": data_fim,#.strftime("%d-%m-%Y"),
             "cliente_id": cliente_id,
             "automovel_id": automovel_id,
             "precoReserva": preco_reserva,
@@ -541,6 +542,10 @@ def update_item_data(item, item_type):
                     updated_item[key] = int(input(f"Novo valor para {key}: "))
                 elif key == 'precoDiario':
                     updated_item[key] = float(input(f"Novo valor para {key}: "))
+                elif key == 'cliente_id':
+                    updated_item[key] = menu_pesquisas_id(listCliente,"nome")
+                elif key =='automovel_id':
+                    updated_item[key] = menu_pesquisas_id(listAutomovel,"matricula")          
                 else:
                     updated_item[key] = input(f"Novo valor para {key}: ")
     
@@ -602,7 +607,7 @@ def search_automovel(matricula):
             for key, value in automovel.items():
                 print(f"{key}: {value}")
             print("\nÚltimos 5 alugueres:")
-            bookings = [b for b in listBooking if int(b["automovel_id"]) == int(automovel["id"]) and  datetime.strptime(b["data_fim"], "%Y-%m-%d").date() < datetime.now().date()]
+            bookings = [b for b in listBooking if int(b["automovel_id"]) == int(automovel["id"]) and  datetime.strptime(b["data_fim"], "%d-%m-%Y").date() < datetime.now().date()]
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
                 print(f"Data: {booking['data_inicio']} a {booking['data_fim']}")
             if bookings == []:
@@ -620,7 +625,7 @@ def search_cliente(nif, listAutomoveis):
                 if key != 'id':                    
                     print(f"{key}: {value}")
             print("\nÚltimos 5 alugueres:")
-            bookings = [b for b in listBooking if b['cliente_id'] == cliente['id'] and datetime.strptime(b["data_fim"], "%Y-%m-%d").date() < datetime.now().date()]
+            bookings = [b for b in listBooking if b['cliente_id'] == cliente['id'] and datetime.strptime(b["data_fim"], "%d-%m-%Y").date() < datetime.now().date()]
             for booking in sorted(bookings, key=lambda x: x['data_inicio'], reverse=True)[:5]:
                 print(f"Data: {booking['data_inicio']} a {booking['data_fim']} Matrícula: {first_or_default(listAutomoveis, 'id', booking['automovel_id'])} Número dias: {booking['numeroDias']} Preço reserva: {booking['precoReserva']} €")                                
             return
